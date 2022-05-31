@@ -1,0 +1,26 @@
+<nav class="navbar">
+  <button class="navbar__toggle" (click)="onNavbarToggle()">Teste</button>
+  <div class="container collapsed" #navContainer>
+    <h2 class="navbar__brand">
+      <a [routerLink]="['home']" class="nav__link">Game Finder</a>
+    </h2>
+    <ul class="navbar__nav">
+      <li>
+        <a
+          class="nav__link"
+          routerLinkActive="active"
+          [routerLink]="['games', 'random']"
+        >
+          Jogo aleatório
+        </a>
+      </li>
+    </ul>
+    <ul class="navbar__nav">
+      <li>
+        <a class="nav__link" routerLinkActive="active" [routerLink]="['auth']"
+          >Entrar</a
+        >
+      </li>
+    </ul>
+  </div>
+</nav>

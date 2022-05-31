@@ -1,0 +1,19 @@
+/* You can add global styles to this file, and also import other style files */
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400&display=swap');
+
+:root {
+  --bg-primary: #EEEEEE;
+  --bg-secondary: #313131;
+  --color-primary: #0075FF;
+  font-family: 'Open Sans', sans-serif;
+  font-size: 1em;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+}
+
+* {
+  box-sizing: border-box;
+}
