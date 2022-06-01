@@ -4,7 +4,8 @@
 
 export const environment = {
   production: false,
-  igdbProxyUrl: 'localhost:5000',
+  igdbProxyUrl: 'http://localhost:5000/api/v1',
+  igdbImageUrl: 'https://images.igdb.com/igdb/image/upload',
 };
 
 /*

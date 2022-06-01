@@ -1,0 +1,19 @@
+<div class="game" (click)="onGamePage()">
+  <img
+    width="150"
+    height="auto"
+    [src]="gameCoverUrl"
+    [alt]="'Cover do jogo ' + game.name"
+  />
+  <div class="game__details">
+    <h2>{{ game.name }}</h2>
+    <p>{{ game.summary.substring(0, 100) }}...</p>
+  </div>
+  <span
+    class="game__rating"
+    [ngClass]="getRatingClasses(game.rating)"
+    *ngIf="game.rating"
+    >{{ game.rating | roundNumber }}</span
+  >
+  <span class="game__rating" *ngIf="!game.rating">-</span>
+</div>

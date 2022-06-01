@@ -1,0 +1,7 @@
+.background {
+  background-color: var(--bg-primary);
+}
+
+.main {
+  padding-top: 6rem;
+}

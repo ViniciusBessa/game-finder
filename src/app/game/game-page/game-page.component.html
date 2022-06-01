@@ -1,0 +1,29 @@
+<section class="section" *ngIf="game">
+  <h1>{{ game.name }}</h1>
+  <img [src]="gameCover" />
+  <div class="game__details">
+    <p>{{ game.summary }}</p>
+  </div>
+</section>
+
+<section class="section" *ngIf="gameScreenshots.length > 0">
+  <h1>Screenshots</h1>
+  <div class="container">
+    <img
+      width="200"
+      height="150"
+      [src]="screenshot"
+      *ngFor="let screenshot of gameScreenshots"
+    />
+  </div>
+</section>
+
+<section class="section" *ngIf="game && game.similar_games">
+  <h1>Jogos similares</h1>
+  <div class="container">
+    <app-game-item
+      [game]="game"
+      *ngFor="let game of game.similar_games.slice(0, 5)"
+    ></app-game-item>
+  </div>
+</section>
