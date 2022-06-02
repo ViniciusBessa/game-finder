@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
-import { GameService } from '../game.service';
-import { Game } from '../shared/game.model';
+import { GameService } from '../../game.service';
+import { Game } from '../../models/game.model';
 
 @Component({
   selector: 'app-game-page',
@@ -25,8 +25,8 @@ export class GamePageComponent implements OnInit {
           params['gameId'],
           '*, cover.*, similar_games.*, similar_games.cover.*, screenshots.*'
         )
-        .subscribe((game: { game: Game }) => {
-          this.game = game.game;
+        .subscribe((game: Game) => {
+          this.game = game;
           this.getGameScreenshots();
           if (this.game.cover && this.game.cover.image_id) {
             this.gameCover = this.gameService.getCoverUrl(

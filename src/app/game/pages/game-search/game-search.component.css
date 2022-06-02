@@ -1,0 +1,41 @@
+.section {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  padding: 36px;
+}
+
+.form {
+  display: flex;
+}
+
+.form__input {
+  border-radius: 90px;
+  height: 40px;
+  width: 50vw;
+  font-size: 1.2em;
+  padding: 0px 30px;
+}
+
+.form__input.ng-touched.ng-invalid {
+  border: 1px solid red;
+}
+
+.form__submit-btn {
+  position: relative;
+  right: 30px;
+  border-radius: 80px;
+}
+
+.container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  width: 90%;
+}
+
+@media only screen and (max-width: 600px) {
+  .container {
+    justify-content: center;
+  }
+}

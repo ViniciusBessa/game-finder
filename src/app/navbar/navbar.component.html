@@ -1,5 +1,7 @@
 <nav class="navbar">
-  <button class="navbar__toggle" (click)="onNavbarToggle()">Teste</button>
+  <button class="navbar__toggle" (click)="onNavbarToggle()">
+    <img src="assets/icons/iconmonstr-menu.svg" />
+  </button>
   <div class="container collapsed" #navContainer>
     <h4 class="navbar__brand">
       <a [routerLink]="['home']" class="nav__link">Game Finder</a>

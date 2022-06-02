@@ -35,3 +35,7 @@
 .game__rating--low {
   background-color: red;
 }
+
+.game__rating--no-rating {
+  background-color: gray;
+}

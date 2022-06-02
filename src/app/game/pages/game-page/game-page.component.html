@@ -1,6 +1,17 @@
 <section class="section" *ngIf="game">
   <h1>{{ game.name }}</h1>
-  <img [src]="gameCover" />
+  <img [src]="gameCover" [alt]="'Capa do jogo ' + game.name" *ngIf="gameCover" />
+  <a
+    title="Ranjithsiji, CC BY-SA 4.0 &lt;https://creativecommons.org/licenses/by-sa/4.0&gt;, via Wikimedia Commons"
+    href="https://commons.wikimedia.org/wiki/File:No-Image-Placeholder.svg"
+    target="_blank"
+    *ngIf="!gameCover"
+    ><img
+      width="264"
+      height="352"
+      [alt]="'Nenhuma imagem disponível para o jogo ' + game.name"
+      src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/No-Image-Placeholder.svg/256px-No-Image-Placeholder.svg.png"
+  /></a>
   <div class="game__details">
     <p>{{ game.summary }}</p>
   </div>

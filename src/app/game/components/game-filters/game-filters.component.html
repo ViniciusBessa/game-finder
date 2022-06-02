@@ -1,0 +1,58 @@
+<button class="form__toggle" (click)="onFiltersToggle()">
+  <img src="assets/icons/iconmonstr-filter.png" width="auto" height="25" />
+  <strong><p class="form__text">Filtros</p></strong>
+</button>
+
+<form
+  class="form disabled"
+  (ngSubmit)="onSubmit()"
+  [formGroup]="filtersForm"
+  #filters
+>
+  <header class="form__header">
+    <button class="form__close-btn" type="button" (click)="onFiltersToggle()">
+      &times;
+    </button>
+    <h3>Filtros</h3>
+  </header>
+
+  <section class="form__body">
+    <h4>Nota</h4>
+    <div>
+      <label class="form__label" for="min-rating">Mínima</label>
+      <input
+        name="min-rating"
+        type="range"
+        min="0"
+        max="100"
+        formControlName="minRating"
+      />
+    </div>
+    <!--Genres Section-->
+    <div class="container" formArrayName="genres">
+      <h4>Gêneros</h4>
+      <label *ngFor="let item of genresFormArray; let index = index">
+        <input
+          type="checkbox"
+          [checked]="item.value.checked"
+          (change)="item.value.checked = !item.value.checked"
+        />
+        {{ item.value.name }}
+      </label>
+    </div>
+
+    <!--Platforms Section-->
+    <div class="container" formArrayName="platforms">
+      <h4>Plataformas</h4>
+      <label *ngFor="let item of platformsFormArray; let index = index">
+        <input
+          type="checkbox"
+          [checked]="item.value.checked"
+          (change)="item.value.checked = !item.value.checked"
+        />
+        {{ item.value.name }}
+      </label>
+    </div>
+    <button class="form__submit-btn" type="submit">Aplicar</button>
+  </section>
+</form>

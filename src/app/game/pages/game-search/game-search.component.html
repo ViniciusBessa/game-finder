@@ -1,0 +1,24 @@
+<section class="section">
+  <form class="form" (ngSubmit)="onSubmit()" #form="ngForm">
+    <input
+      name="name"
+      class="form__input"
+      type="text"
+      placeholder="Digite o nome de um jogo"
+      ngModel
+      required
+    />
+    <button class="form__submit-btn" type="submit">
+      <img
+        src="assets/icons/iconmonstr-magnifier.png"
+        width="auto"
+        height="20"
+      />
+    </button>
+  </form>
+  <app-game-filters (formValues)="onFiltersUpdate($event)"></app-game-filters>
+
+  <div class="container">
+    <app-game-item [game]="game" *ngFor="let game of games"></app-game-item>
+  </div>
+</section>

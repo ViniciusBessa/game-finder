@@ -1,0 +1,39 @@
+<div class="game" (click)="onGamePage()">
+  <img
+    width="150"
+    height="200"
+    [src]="gameCoverUrl"
+    [alt]="'Cover do jogo ' + game.name"
+    *ngIf="gameCoverUrl"
+  />
+  <a
+    title="Ranjithsiji, CC BY-SA 4.0 &lt;https://creativecommons.org/licenses/by-sa/4.0&gt;, via Wikimedia Commons"
+    href="https://commons.wikimedia.org/wiki/File:No-Image-Placeholder.svg"
+    target="_blank"
+    *ngIf="!gameCoverUrl"
+    ><img
+      width="150"
+      height="200"
+      [alt]="'Nenhuma imagem disponível para o jogo ' + game.name"
+      src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/No-Image-Placeholder.svg/256px-No-Image-Placeholder.svg.png"
+  /></a>
+
+  <div class="game__details">
+    <h2>{{ game.name }}</h2>
+    <p *ngIf="game.summary.length <= 100">{{ game.summary }}</p>
+    <p *ngIf="game.summary.length > 100">
+      {{ game.summary.substring(0, 100) }}...
+    </p>
+  </div>
+  <span
+    class="game__rating"
+    [ngClass]="getRatingClasses(game.rating)"
+    *ngIf="game.rating"
+    >{{ game.rating | roundNumber }}</span
+  >
+  <span
+    class="game__rating game__rating--no-rating"
+    *ngIf="game.rating === undefined"
+    >-</span
+  >
+</div>

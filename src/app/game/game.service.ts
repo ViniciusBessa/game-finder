@@ -1,9 +1,11 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { take } from 'rxjs';
+import { map, take } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { GameQueryObject } from '../shared/gameQueryObject.model';
-import { Game } from './shared/game.model';
+import { GameQueryObject } from '../models/gameQueryObject.model';
+import { Game } from './models/game.model';
+import { Genre } from './models/genre.model';
+import { Platform } from './models/platform.model';
 
 @Injectable({ providedIn: 'root' })
 export class GameService {
@@ -18,18 +20,86 @@ export class GameService {
       }
     }
     return this.http
-      .get<{ games: Game[]}>(`${environment.igdbProxyUrl}/games`, { params: queryParams })
-      .pipe(take(1));
+      .get<{ games: Game[] }>(`${environment.igdbProxyUrl}/games`, {
+        params: queryParams,
+      })
+      .pipe(
+        take(1),
+        map((response) => response.games)
+      );
   }
 
   getGame(gameId: number, fields: string) {
     let queryParams = new HttpParams();
     queryParams = queryParams.append('fields', fields);
     return this.http
-      .get<{ game: Game}>(`${environment.igdbProxyUrl}/games/${gameId}`, {
+      .get<{ game: Game }>(`${environment.igdbProxyUrl}/games/${gameId}`, {
         params: queryParams,
       })
-      .pipe(take(1));
+      .pipe(
+        take(1),
+        map((response) => response.game)
+      );
+  }
+
+  getGenres(queryObject: GameQueryObject) {
+    let queryParams = new HttpParams();
+
+    for (const key in queryObject) {
+      if (queryObject.hasOwnProperty(key)) {
+        queryParams = queryParams.append(key, queryObject[key]);
+      }
+    }
+    return this.http
+      .get<{ genres: Genre[] }>(`${environment.igdbProxyUrl}/genres`, {
+        params: queryParams,
+      })
+      .pipe(
+        take(1),
+        map((response) => {
+          const genres = response.genres;
+          // Sorting the genres by the name
+          genres.sort((a, b) => {
+            if (a.name > b.name) {
+              return 1;
+            } else if (a.name < b.name) {
+              return -1;
+            }
+            return 0;
+          });
+          return genres;
+        })
+      );
+  }
+
+  getPlatforms(queryObject: GameQueryObject) {
+    let queryParams = new HttpParams();
+
+    for (const key in queryObject) {
+      if (queryObject.hasOwnProperty(key)) {
+        queryParams = queryParams.append(key, queryObject[key]);
+      }
+    }
+    return this.http
+      .get<{ platforms: Platform[] }>(`${environment.igdbProxyUrl}/platforms`, {
+        params: queryParams,
+      })
+      .pipe(
+        take(1),
+        map((response) => {
+          const platforms = response.platforms;
+          // Sorting the platforms by the name
+          platforms.sort((a, b) => {
+            if (a.name > b.name) {
+              return 1;
+            } else if (a.name < b.name) {
+              return -1;
+            }
+            return 0;
+          });
+          return platforms;
+        })
+      );
   }
 
   getCoverUrl(imageId: string): string {

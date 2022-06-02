@@ -2,6 +2,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400&display=swap');
 
 :root {
+  --font-primary: black;
+  --font-secondary: white;
   --bg-primary: #EEEEEE;
   --bg-secondary: #313131;
   --color-primary: #0075FF;
@@ -10,8 +12,17 @@
 }
 
 body {
+  height: 100vh;
   margin: 0;
   padding: 0;
+}
+
+main {
+  min-height: 80%;
+}
+
+footer {
+  min-height: 20%;
 }
 
 * {

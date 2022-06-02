@@ -3,6 +3,6 @@ export interface GameQueryObject {
   fields: string,
   search?: string,
   where?: string,
-  page?: string,
-  limit?: string,
+  page?: string | number,
+  limit?: string | number,
 }
