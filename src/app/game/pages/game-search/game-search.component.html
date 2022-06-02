@@ -22,3 +22,5 @@
     <app-game-item [game]="game" *ngFor="let game of games"></app-game-item>
   </div>
 </section>
+
+<app-loading-spinner *ngIf="isLoading"></app-loading-spinner>

@@ -12,6 +12,8 @@ export class GamePageComponent implements OnInit {
   game!: Game;
   gameScreenshots: string[] = [];
   gameCover: string | undefined;
+  isLoading: boolean = false;
+  responseError: any;
 
   constructor(
     private gameService: GameService,
@@ -20,19 +22,27 @@ export class GamePageComponent implements OnInit {
 
   ngOnInit(): void {
     this.route.params.subscribe((params: Params) => {
+      this.isLoading = true;
       this.gameService
         .getGame(
           params['gameId'],
           '*, cover.*, similar_games.*, similar_games.cover.*, screenshots.*'
         )
-        .subscribe((game: Game) => {
-          this.game = game;
-          this.getGameScreenshots();
-          if (this.game.cover && this.game.cover.image_id) {
-            this.gameCover = this.gameService.getCoverUrl(
-              this.game.cover.image_id
-            );
-          }
+        .subscribe({
+          next: (game: Game) => {
+            this.game = game;
+            this.getGameScreenshots();
+            if (this.game.cover && this.game.cover.image_id) {
+              this.gameCover = this.gameService.getCoverUrl(
+                this.game.cover.image_id
+              );
+            }
+          },
+          error: (error) => {
+            this.responseError = error;
+            this.isLoading = false;
+          },
+          complete: () => (this.isLoading = false),
         });
     });
   }

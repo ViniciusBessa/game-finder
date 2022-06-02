@@ -15,6 +15,8 @@ import { Game } from '../../models/game.model';
 export class GameSearchComponent implements OnInit {
   @ViewChild('form') nameForm!: NgForm;
   games: Game[] = [];
+  isLoading: boolean = false;
+  responseError: any;
 
   constructor(
     private gameService: GameService,
@@ -25,9 +27,15 @@ export class GameSearchComponent implements OnInit {
   ngOnInit(): void {
     this.route.queryParams.subscribe((queryParams: Params) => {
       if (Object.values(queryParams).length > 0) {
-        this.gameService
-          .getGames(queryParams as GameQueryObject)
-          .subscribe((games) => (this.games = games));
+        this.isLoading = true;
+        this.gameService.getGames(queryParams as GameQueryObject).subscribe({
+          next: (games) => (this.games = games),
+          error: (error) => {
+            this.responseError = error;
+            this.isLoading = false;
+          },
+          complete: () => (this.isLoading = false),
+        });
       }
     });
   }
