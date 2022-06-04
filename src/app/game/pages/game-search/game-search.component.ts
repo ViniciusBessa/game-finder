@@ -55,11 +55,17 @@ export class GameSearchComponent implements OnInit {
   }
 
   onFiltersUpdate(formValues: FiltersFormValues) {
-    let selectedGenresIds = this.getFormArrayIds(formValues.genres);
-    let selectedPlatformsIds = this.getFormArrayIds(formValues.platforms);
+    const selectedGenresIds: string = this.getFormArrayIds(formValues.genres);
+    const selectedPlatformsIds: string = this.getFormArrayIds(
+      formValues.platforms
+    );
+    const minRating = formValues.minRating;
+    const maxRating = formValues.maxRating;
+    const rating: string = `rating>=${minRating}&rating<=${maxRating}`;
+
     const queryParams = {
       fields: '*,genres.*,platforms.*,cover.*',
-      where: `genres=(${selectedGenresIds})&platforms=(${selectedPlatformsIds})`,
+      where: `genres=(${selectedGenresIds})&platforms=(${selectedPlatformsIds})&${rating}`,
     };
     this.router.navigate(['.'], {
       relativeTo: this.route,

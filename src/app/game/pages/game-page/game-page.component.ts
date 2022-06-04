@@ -31,7 +31,7 @@ export class GamePageComponent implements OnInit {
         .subscribe({
           next: (game: Game) => {
             this.game = game;
-            this.getGameScreenshots();
+            this.loadGameScreenshots();
             if (this.game.cover && this.game.cover.image_id) {
               this.gameCover = this.gameService.getCoverUrl(
                 this.game.cover.image_id
@@ -47,7 +47,7 @@ export class GamePageComponent implements OnInit {
     });
   }
 
-  getGameScreenshots(): void {
+  loadGameScreenshots(): void {
     const screenshots: string[] = [];
 
     if (!this.game || !this.game.screenshots) return;

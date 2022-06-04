@@ -7,7 +7,7 @@
   class="form disabled"
   (ngSubmit)="onSubmit()"
   [formGroup]="filtersForm"
-  #filters
+  *ngIf="showForm"
 >
   <header class="form__header">
     <button class="form__close-btn" type="button" (click)="onFiltersToggle()">
@@ -17,20 +17,49 @@
   </header>
 
   <section class="form__body">
+    <!--Ratings Section-->
     <h4>Nota</h4>
-    <div>
-      <label class="form__label" for="min-rating">Mínima</label>
-      <input
-        name="min-rating"
-        type="range"
-        min="0"
-        max="100"
-        formControlName="minRating"
-      />
+    <div class="container container--space-between">
+      <div>
+        <label class="form__label" for="min-rating-number">Nota Mínima</label>
+        <input
+          name="min-rating-number"
+          class="form__input"
+          type="number"
+          formControlName="minRating"
+          [value]="filtersForm.value.minRating"
+        />
+        <input
+          name="min-rating-range"
+          type="range"
+          min="0"
+          max="100"
+          formControlName="minRating"
+          [value]="filtersForm.value.minRating"
+        />
+      </div>
+      <div>
+        <label class="form__label" for="max-rating-number">Nota Máxima</label>
+        <input
+          name="max-rating-number"
+          class="form__input"
+          type="number"
+          formControlName="maxRating"
+          [value]="filtersForm.value.maxRating"
+        />
+        <input
+          name="max-rating-range"
+          type="range"
+          min="0"
+          max="100"
+          formControlName="maxRating"
+          [value]="filtersForm.value.maxRating"
+        />
+      </div>
     </div>
     <!--Genres Section-->
+    <h4>Gêneros</h4>
     <div class="container" formArrayName="genres">
-      <h4>Gêneros</h4>
       <label *ngFor="let item of genresFormArray; let index = index">
         <input
           type="checkbox"
@@ -42,8 +71,8 @@
     </div>
 
     <!--Platforms Section-->
+    <h4>Plataformas</h4>
     <div class="container" formArrayName="platforms">
-      <h4>Plataformas</h4>
       <label *ngFor="let item of platformsFormArray; let index = index">
         <input
           type="checkbox"

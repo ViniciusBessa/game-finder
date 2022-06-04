@@ -19,7 +19,7 @@
   /></a>
 
   <div class="game__details">
-    <h2>{{ game.name }}</h2>
+    <h3>{{ game.name }}</h3>
     <p *ngIf="game.summary && game.summary.length <= 100">{{ game.summary }}</p>
     <p *ngIf="game.summary && game.summary.length > 100">
       {{ game.summary.substring(0, 100) }}...

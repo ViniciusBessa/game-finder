@@ -19,14 +19,7 @@
 
 <section class="section" *ngIf="gameScreenshots.length > 0">
   <h1>Screenshots</h1>
-  <div class="container">
-    <img
-      width="200"
-      height="150"
-      [src]="screenshot"
-      *ngFor="let screenshot of gameScreenshots"
-    />
-  </div>
+  <app-image-slider [images]="gameScreenshots"></app-image-slider>
 </section>
 
 <section class="section" *ngIf="game && game.similar_games">

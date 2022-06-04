@@ -25,11 +25,11 @@
 }
 
 .game__rating--high {
-  background-color: #0AAB0A;
+  background-color: #0aab0a;
 }
 
 .game__rating--average {
-  background-color: #DA7712;
+  background-color: #da7712;
 }
 
 .game__rating--low {
@@ -38,4 +38,19 @@
 
 .game__rating--no-rating {
   background-color: gray;
+}
+
+@media only screen and (max-width: 600px) {
+  .game {
+    width: 191px;
+    min-height: 313px;
+    flex-direction: column;
+    gap: 0;
+    text-align: center;
+  }
+
+  .game > *:last-child,
+  .game__details > *:last-child {
+    display: none;
+  }
 }

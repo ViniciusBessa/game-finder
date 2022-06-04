@@ -1,0 +1,28 @@
+<div class="container">
+  <img
+    width="200"
+    height="150"
+    [src]="image"
+    (click)="onToggleSlider(index)"
+    *ngFor="let image of images; let index = index"
+  />
+</div>
+
+<div class="slider" *ngIf="showSlider">
+  <div class="slider__background" (click)="onToggleSlider(0)"></div>
+  <button
+    class="slider__button"
+    (click)="onUpdateSelectedImage(-1)"
+    *ngIf="images.length > 1"
+  >
+    <img src="assets/icons/iconmonstr-angel-left-thin.svg" />
+  </button>
+  <img class="slider__image" [src]="getSelectedImage()" />
+  <button
+    class="slider__button"
+    (click)="onUpdateSelectedImage(1)"
+    *ngIf="images.length > 1"
+  >
+    <img src="assets/icons/iconmonstr-angel-right-thin.svg" />
+  </button>
+</div>

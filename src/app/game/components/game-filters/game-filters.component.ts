@@ -1,11 +1,4 @@
-import {
-  Component,
-  ElementRef,
-  EventEmitter,
-  OnInit,
-  Output,
-  ViewChild,
-} from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import {
   AbstractControl,
   FormArray,
@@ -25,9 +18,13 @@ import { Platform } from '../../models/platform.model';
 })
 export class GameFiltersComponent implements OnInit {
   @Output() formValues = new EventEmitter<FiltersFormValues>();
-  @ViewChild('filters') filters!: ElementRef;
   filtersForm = new FormGroup({
     minRating: new FormControl(0, [
+      Validators.required,
+      Validators.min(0),
+      Validators.max(100),
+    ]),
+    maxRating: new FormControl(100, [
       Validators.required,
       Validators.min(0),
       Validators.max(100),
@@ -35,6 +32,7 @@ export class GameFiltersComponent implements OnInit {
     genres: new FormArray([]),
     platforms: new FormArray([]),
   });
+  showForm: boolean = false;
 
   constructor(private gameService: GameService) {}
 
@@ -48,6 +46,16 @@ export class GameFiltersComponent implements OnInit {
     this.gameService
       .getPlatforms({ fields: '*', limit: 50 })
       .subscribe((platforms) => this.setPlatformsFormArray(platforms));
+
+    // Observing any value changes in the form
+    this.filtersForm.valueChanges.subscribe(() => {
+      // Ensuring that the maxRating is always higher or equal to the minRating
+      if (this.filtersForm.value.minRating > this.filtersForm.value.maxRating) {
+        this.filtersForm.patchValue({
+          maxRating: this.filtersForm.value.minRating,
+        });
+      }
+    });
   }
 
   setGenresFormArray(genres: Genre[]): void {
@@ -79,7 +87,7 @@ export class GameFiltersComponent implements OnInit {
   }
 
   onFiltersToggle(): void {
-    this.filters.nativeElement.classList.toggle('disabled');
+    this.showForm = !this.showForm;
   }
 
   onSubmit(): void {

@@ -60,6 +60,15 @@
   margin-bottom: 10px;
 }
 
+.form__input {
+  display: block;
+  font-size: 1.1rem;
+}
+
+.form__input.ng-invalid.ng-touched {
+  border: 1px solid red;
+}
+
 .form__submit-btn {
   display: block;
   padding: 15px;
@@ -80,8 +89,9 @@
   width: 100%;
 }
 
-.disabled {
-  display: none;
+.container--space-between {
+  flex-direction: row;
+  justify-content: space-between;
 }
 
 @media only screen and (max-width: 769px) {
