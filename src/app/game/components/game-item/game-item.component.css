@@ -55,6 +55,7 @@
   }
 
   .game > *:last-child,
+  .game__details > *:nth-last-child(2),
   .game__details > *:last-child {
     display: none;
   }

@@ -26,7 +26,7 @@ export class GamePageComponent implements OnInit {
       this.gameService
         .getGame(
           params['gameId'],
-          '*, cover.*, similar_games.*, similar_games.cover.*, screenshots.*'
+          '*, cover.*, similar_games.*, similar_games.genres.*, similar_games.cover.*, screenshots.*'
         )
         .subscribe({
           next: (game: Game) => {
