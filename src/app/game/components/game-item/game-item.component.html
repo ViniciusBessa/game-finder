@@ -24,6 +24,7 @@
     <p *ngIf="game.summary && game.summary.length > 100">
       {{ game.summary.substring(0, 100) }}...
     </p>
+    <p class="game__genres" *ngIf="getGameGenres()">{{ getGameGenres() }}</p>
   </div>
   <span
     class="game__rating"

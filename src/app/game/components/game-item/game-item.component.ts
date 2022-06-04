@@ -30,6 +30,10 @@ export class GameItemComponent implements OnInit {
     };
   }
 
+  getGameGenres(): string | undefined {
+    return this.game.genres?.map((genre) => genre.name).join(', ');
+  }
+
   onGamePage() {
     window.scrollTo({ top: 0 });
     this.router.navigate(['games', this.game.id]);

@@ -4,9 +4,8 @@
       name="name"
       class="form__input"
       type="text"
-      placeholder="Digite o nome de um jogo"
+      placeholder="Pesquise por um jogo"
       ngModel
-      required
     />
     <button class="form__submit-btn" type="submit">
       <img
@@ -16,7 +15,12 @@
       />
     </button>
   </form>
-  <app-game-filters (formValues)="onFiltersUpdate($event)"></app-game-filters>
+  <div class="container">
+    <app-game-filters (formValues)="onFiltersUpdate($event)"></app-game-filters>
+    <button class="clear-btn" type="button" (click)="onClear()">
+      <strong>Limpar resultados</strong>
+    </button>
+  </div>
 
   <div class="container">
     <app-game-item [game]="game" *ngFor="let game of games"></app-game-item>

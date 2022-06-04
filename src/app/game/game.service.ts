@@ -58,15 +58,6 @@ export class GameService {
         take(1),
         map((response) => {
           const genres = response.genres;
-          // Sorting the genres by the name
-          genres.sort((a, b) => {
-            if (a.name > b.name) {
-              return 1;
-            } else if (a.name < b.name) {
-              return -1;
-            }
-            return 0;
-          });
           return genres;
         })
       );
@@ -88,15 +79,6 @@ export class GameService {
         take(1),
         map((response) => {
           const platforms = response.platforms;
-          // Sorting the platforms by the name
-          platforms.sort((a, b) => {
-            if (a.name > b.name) {
-              return 1;
-            } else if (a.name < b.name) {
-              return -1;
-            }
-            return 0;
-          });
           return platforms;
         })
       );

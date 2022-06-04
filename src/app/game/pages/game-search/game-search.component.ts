@@ -1,6 +1,5 @@
-import { HttpParams } from '@angular/common/http';
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { FormGroup, NgForm } from '@angular/forms';
+import { NgForm } from '@angular/forms';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { GameQueryObject } from 'src/app/models/gameQueryObject.model';
 import { GameService } from '../../game.service';
@@ -15,6 +14,7 @@ import { Game } from '../../models/game.model';
 export class GameSearchComponent implements OnInit {
   @ViewChild('form') nameForm!: NgForm;
   games: Game[] = [];
+  currentPage: number = 1;
   isLoading: boolean = false;
   responseError: any;
 
@@ -26,6 +26,7 @@ export class GameSearchComponent implements OnInit {
 
   ngOnInit(): void {
     this.route.queryParams.subscribe((queryParams: Params) => {
+      this.currentPage = +queryParams['page'] || 1;
       if (Object.values(queryParams).length > 0) {
         this.isLoading = true;
         this.gameService.getGames(queryParams as GameQueryObject).subscribe({
@@ -40,7 +41,7 @@ export class GameSearchComponent implements OnInit {
     });
   }
 
-  onSubmit() {
+  onSubmit(): void {
     if (this.nameForm.valid) {
       const queryParams = {
         fields: '*,genres.*,platforms.*,cover.*',
@@ -54,7 +55,7 @@ export class GameSearchComponent implements OnInit {
     }
   }
 
-  onFiltersUpdate(formValues: FiltersFormValues) {
+  onFiltersUpdate(formValues: FiltersFormValues): void {
     const selectedGenresIds: string = this.getFormArrayIds(formValues.genres);
     const selectedPlatformsIds: string = this.getFormArrayIds(
       formValues.platforms
@@ -67,9 +68,17 @@ export class GameSearchComponent implements OnInit {
       fields: '*,genres.*,platforms.*,cover.*',
       where: `genres=(${selectedGenresIds})&platforms=(${selectedPlatformsIds})&${rating}`,
     };
-    this.router.navigate(['.'], {
+    this.router.navigate([], {
       relativeTo: this.route,
       queryParams,
+    });
+  }
+
+  onClear(): void {
+    this.games = [];
+    this.router.navigate([], {
+      relativeTo: this.route,
+      queryParams: { fields: null, search: null, where: null, page: null },
       queryParamsHandling: 'merge',
     });
   }
