@@ -14,6 +14,7 @@ import { Game } from '../../models/game.model';
 export class GameSearchComponent implements OnInit {
   @ViewChild('form') nameForm!: NgForm;
   games: Game[] = [];
+  gameCount: number = 0;
   currentPage: number = 1;
   isLoading: boolean = false;
   responseError: any;
@@ -29,6 +30,13 @@ export class GameSearchComponent implements OnInit {
       this.currentPage = +queryParams['page'] || 1;
       if (Object.values(queryParams).length > 0) {
         this.isLoading = true;
+
+        // Getting the number of games that fits the queryParams
+        this.gameService
+          .getGameCount(queryParams as GameQueryObject)
+          .subscribe({ next: (count) => (this.gameCount = count) });
+
+        // Getting five games that fit the queryParams
         this.gameService.getGames(queryParams as GameQueryObject).subscribe({
           next: (games) => (this.games = games),
           error: (error) => {
@@ -46,6 +54,7 @@ export class GameSearchComponent implements OnInit {
       const queryParams = {
         fields: '*,genres.*,platforms.*,cover.*',
         search: this.nameForm.value.name,
+        page: null,
       };
       this.router.navigate([], {
         relativeTo: this.route,
@@ -67,6 +76,7 @@ export class GameSearchComponent implements OnInit {
     const queryParams = {
       fields: '*,genres.*,platforms.*,cover.*',
       where: `genres=(${selectedGenresIds})&platforms=(${selectedPlatformsIds})&${rating}`,
+      page: null
     };
     this.router.navigate([], {
       relativeTo: this.route,
@@ -94,5 +104,9 @@ export class GameSearchComponent implements OnInit {
       .filter((formControl) => formControl.checked)
       .map((formControl) => formControl.id)
       .join(',');
+  }
+
+  getLastPage(): number {
+    return Math.ceil(this.gameCount / 5);
   }
 }

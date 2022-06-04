@@ -22,8 +22,38 @@
     </button>
   </div>
 
+  <!--Result Games-->
   <div class="container">
     <app-game-item [game]="game" *ngFor="let game of games"></app-game-item>
+  </div>
+
+  <!--Pagination-->
+  <div class="container container--center" *ngIf="games.length > 0">
+    <a
+      class="page-anchor"
+      routerLink="."
+      [queryParams]="{ page: currentPage - 1 }"
+      queryParamsHandling="merge"
+      *ngIf="currentPage > 1"
+      >{{ currentPage - 1 }}</a
+    >
+    <a class="page-anchor page-anchor--active">{{ currentPage }}</a>
+    <a
+      class="page-anchor"
+      routerLink="."
+      [queryParams]="{ page: currentPage + 1 }"
+      queryParamsHandling="merge"
+      *ngIf="currentPage + 1 <= getLastPage()"
+      >{{ currentPage + 1 }}</a
+    >
+    <a
+      class="page-anchor"
+      routerLink="."
+      [queryParams]="{ page: getLastPage() }"
+      queryParamsHandling="merge"
+      *ngIf="currentPage + 1 < getLastPage()"
+      >{{ getLastPage() }}</a
+    >
   </div>
 </section>
 

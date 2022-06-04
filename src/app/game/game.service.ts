@@ -42,6 +42,24 @@ export class GameService {
       );
   }
 
+  getGameCount(queryObject: GameQueryObject) {
+    let queryParams = new HttpParams();
+
+    for (const key in queryObject) {
+      if (queryObject.hasOwnProperty(key)) {
+        queryParams = queryParams.append(key, queryObject[key]);
+      }
+    }
+    return this.http
+      .get<{ count: number }>(`${environment.igdbProxyUrl}/games/count`, {
+        params: queryParams,
+      })
+      .pipe(
+        take(1),
+        map((response) => response.count)
+      );
+  }
+
   getGenres(queryObject: GameQueryObject) {
     let queryParams = new HttpParams();
 
