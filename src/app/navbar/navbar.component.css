@@ -31,7 +31,7 @@
   display: flex;
   gap: 16px;
   max-height: 100vh;
-  transition: max-height 600ms linear;
+  transition: max-height 200ms ease-in-out;
 }
 
 .navbar__brand {
