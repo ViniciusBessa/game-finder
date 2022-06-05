@@ -24,7 +24,7 @@
 }
 
 .form__close-btn {
-  font-size: 2em;
+  font-size: 2rem;
   width: 60px;
   height: 60px;
   border-radius: 50%;
@@ -68,15 +68,33 @@
 
 .form__submit-btn {
   display: block;
-  padding: 15px;
-  background-color: var(--color-primary);
-  border: none;
+  padding: 16px;
+  background-color: transparent;
+  border: 2px solid var(--color-primary);
   font-size: 1.1rem;
+  color: var(--color-primary);
+  transition: background-color 600ms ease;
+}
+
+.form__submit-btn:hover, .form__submit-btn:active {
+  background-color: var(--color-primary);
   color: white;
 }
 
-.form__submit-btn:hover {
-  opacity: 0.7;
+.form__clear-btn {
+  display: block;
+  width: fit-content;
+  padding: 12px;
+  margin: 18px 0px;
+  border: 2px solid #E30C0C;
+  background-color: transparent;
+  color: #E30C0C;
+  transition: background-color 600ms ease;
+}
+
+.form__clear-btn:hover, .form__clear-btn:active {
+  background-color: #E30C0C;
+  color: white;
 }
 
 .container {

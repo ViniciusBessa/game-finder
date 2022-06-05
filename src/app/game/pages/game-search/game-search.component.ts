@@ -69,14 +69,25 @@ export class GameSearchComponent implements OnInit {
     const selectedPlatformsIds: string = this.getFormArrayIds(
       formValues.platforms
     );
+    const whereQueryParam: string[] = [];
+
+    // If at least one genre is selected, it is added to the whereQueryParam
+    if (selectedGenresIds) {
+      whereQueryParam.push(`genres=(${selectedGenresIds})`);
+    }
+    // If at least one platform is selected, it is added to the whereQueryParam
+    if (selectedPlatformsIds) {
+      whereQueryParam.push(`platforms=(${selectedPlatformsIds})`);
+    }
+    // Adding the rating range to the where
     const minRating = formValues.minRating;
     const maxRating = formValues.maxRating;
-    const rating: string = `rating>=${minRating}&rating<=${maxRating}`;
+    whereQueryParam.push(`rating>=${minRating}&rating<=${maxRating}`);
 
     const queryParams = {
       fields: '*,genres.*,platforms.*,cover.*',
-      where: `genres=(${selectedGenresIds})&platforms=(${selectedPlatformsIds})&${rating}`,
-      page: null
+      where: whereQueryParam.join('&'),
+      page: null,
     };
     this.router.navigate([], {
       relativeTo: this.route,

@@ -68,6 +68,13 @@
         />
         {{ item.value.name }}
       </label>
+      <button
+        class="form__clear-btn"
+        type="button"
+        (click)="onClearFormsArray('genres')"
+      >
+        Limpar gêneros
+      </button>
     </div>
 
     <!--Platforms Section-->
@@ -81,6 +88,13 @@
         />
         {{ item.value.name }}
       </label>
+      <button
+        class="form__clear-btn"
+        type="button"
+        (click)="onClearFormsArray('platforms')"
+      >
+        Limpar plataformas
+      </button>
     </div>
     <button class="form__submit-btn" type="submit">Aplicar</button>
   </section>

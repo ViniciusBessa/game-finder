@@ -95,4 +95,12 @@ export class GameFiltersComponent implements OnInit {
       this.formValues.emit(this.filtersForm.value);
     }
   }
+
+  onClearFormsArray(formsArrayName: string): void {
+    const formsArray: FormArray | undefined = <FormArray>(
+      this.filtersForm.get(formsArrayName)
+    );
+    if (!formsArray) return;
+    formsArray.controls.forEach((control) => (control.value.checked = false));
+  }
 }
