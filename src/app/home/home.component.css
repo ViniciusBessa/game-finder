@@ -1,0 +1,103 @@
+.section {
+  min-height: 60vh;
+  padding: 20px 50px;
+  text-align: center;
+}
+
+.section--bg-dark {
+  background-color: rgb(31, 30, 30);
+}
+
+.section--bg-light {
+  background-color: white;
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 16px;
+  width: 100%;
+}
+
+.container--flex-column {
+  flex-direction: column;
+}
+
+.form {
+  display: flex;
+}
+
+.form__input {
+  border-radius: 10px;
+  height: 40px;
+  width: 60vw;
+  font-size: 1.2rem;
+  padding: 0px 30px;
+}
+
+.form__input.ng-touched.ng-invalid {
+  border: 1px solid red;
+}
+
+.card {
+  position: relative;
+}
+
+.card__background {
+  position: absolute;
+  background-color: black;
+  opacity: 0.8;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+}
+
+.card__background:hover,
+.card__background:active {
+  cursor: pointer;
+  background-color: var(--color-primary);
+}
+
+.background-img {
+  width: 100%;
+  height: 100%;
+  filter: blur(2px);
+}
+
+.img-text {
+  position: absolute;
+  text-align: center;
+  color: var(--bg-primary);
+  font-size: 1.8rem;
+  margin: 0;
+  top: 50%;
+  left: 50%;
+  width: 100%;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  z-index: 1;
+}
+
+.text-white {
+  color: white;
+}
+
+@media only screen and (max-width: 600px) {
+  .section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0px 10px;
+  }
+
+  .form,
+  .container {
+    justify-content: center;
+  }
+
+  .form__input {
+    width: 90%;
+  }
+}

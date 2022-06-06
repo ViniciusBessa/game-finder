@@ -1,1 +1,32 @@
-<p>home works!</p>
+<section class="section section--bg-dark container container--flex-column">
+  <h1 class="text-white">Procure por jogos entre os milhares disponíveis!</h1>
+  <form class="form" (ngSubmit)="onSubmit()" #form="ngForm">
+    <input
+      name="name"
+      class="form__input"
+      type="text"
+      placeholder="Pesquise por um jogo"
+      ngModel
+      required
+    />
+  </form>
+</section>
+
+<section class="section section--bg-light">
+  <h1>Principais Gêneros</h1>
+  <div class="container">
+    <div
+      class="card"
+      [routerLink]="['/games', 'search']"
+      [queryParams]="{
+        fields: '*,genres.*,platforms.*,cover.*',
+        where: 'genres=(' + game.genres![0].id + ')'
+      }"
+      *ngFor="let game of games; let index = index"
+    >
+      <div class="card__background"></div>
+      <img class="background-img" [src]="getCover(index)" />
+      <p class="img-text" *ngIf="game.genres">{{ game.genres[0].name }}</p>
+    </div>
+  </div>
+</section>

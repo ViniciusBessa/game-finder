@@ -44,7 +44,7 @@ export class GameFiltersComponent implements OnInit {
 
     // Getting all platforms from the API
     this.gameService
-      .getPlatforms({ fields: '*', limit: 50 })
+      .getPlatforms({ fields: '*', limit: 500 })
       .subscribe((platforms) => this.setPlatformsFormArray(platforms));
 
     // Observing any value changes in the form
@@ -93,6 +93,8 @@ export class GameFiltersComponent implements OnInit {
   onSubmit(): void {
     if (this.filtersForm.valid) {
       this.formValues.emit(this.filtersForm.value);
+      // Closing the filters window
+      this.onFiltersToggle();
     }
   }
 
@@ -101,6 +103,7 @@ export class GameFiltersComponent implements OnInit {
       this.filtersForm.get(formsArrayName)
     );
     if (!formsArray) return;
+    // Setting all controls in the formsArray to false
     formsArray.controls.forEach((control) => (control.value.checked = false));
   }
 }
