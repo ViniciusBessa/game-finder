@@ -51,7 +51,7 @@
     min-height: 313px;
     flex-direction: column;
     gap: 0;
-    text-align: center;
+    align-items: center;
   }
 
   .game > *:last-child,
