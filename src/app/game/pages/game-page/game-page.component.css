@@ -1,5 +1,5 @@
 .section {
-  padding: 0px 50px;
+  padding: 0px 40px;
 }
 
 .container {
@@ -11,14 +11,71 @@
 
 .game {
   display: flex;
-  flex-wrap: wrap;
+  flex-direction: row;
+  gap: 16px;
+  border: 6px solid var(--color-primary);
+  background-color: white;
+  padding: 10px;
 }
 
 .game__details {
-  border: 5px solid var(--color-primary);
-  background-color: white;
-  border-radius: 4px;
-  padding: 10px
+  display: flex;
+  flex-direction: column;
+}
+
+.game__ratings {
+  display: flex;
+  flex-direction: column;
+  flex-shrink: 0;
+  flex-wrap: wrap;
+  gap: 16px;
+  align-items: center;
+  margin-left: auto;
+}
+
+.rating__container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.game__rating {
+  color: white;
+  border-radius: 50%;
+  width: 100px;
+  height: 100px;
+  line-height: 100px;
+  text-align: center;
+  font-size: 2rem;
+  flex-shrink: 0;
+}
+
+.game__rating--high {
+  background-color: #0aab0a;
+}
+
+.game__rating--average {
+  background-color: #da7712;
+}
+
+.game__rating--low {
+  background-color: red;
+}
+
+.game__rating--no-rating {
+  background-color: gray;
+}
+
+@media only screen and (max-width: 768px) {
+  .game {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .game__ratings {
+    flex-direction: row;
+    margin-left: 0;
+  }
 }
 
 @media only screen and (max-width: 600px) {

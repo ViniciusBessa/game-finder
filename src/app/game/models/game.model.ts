@@ -3,6 +3,7 @@ export interface Game {
   name: string;
   summary: string;
   rating?: number;
+  aggregated_rating?: number;
   release_dates?: { id: number; date?: number }[];
   genres?: { id: number; name: string }[];
   platforms?: { id: number; name: string }[];

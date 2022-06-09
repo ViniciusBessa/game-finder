@@ -26,7 +26,7 @@ export class GamePageComponent implements OnInit {
       this.gameService
         .getGame(
           params['gameId'],
-          '*, cover.*, similar_games.*, similar_games.genres.*, similar_games.cover.*, screenshots.*'
+          '*, genres.*,platforms.*, cover.*, similar_games.*, similar_games.genres.*, similar_games.cover.*, screenshots.*'
         )
         .subscribe({
           next: (game: Game) => {
@@ -60,5 +60,21 @@ export class GamePageComponent implements OnInit {
       }
     }
     this.gameScreenshots = screenshots;
+  }
+
+  getRatingClasses(rating: number) {
+    return {
+      'game__rating--high': rating >= 75,
+      'game__rating--average': rating >= 50 && rating < 75,
+      'game__rating--low': rating < 50,
+    };
+  }
+
+  getGenres(): string {
+    return this.game.genres!.map((genre) => genre.name).join(', ');
+  }
+
+  getPlatforms(): string {
+    return this.game.platforms!.map((platform) => platform.name).join(', ');
   }
 }

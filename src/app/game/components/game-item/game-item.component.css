@@ -1,6 +1,5 @@
 .game {
   display: flex;
-  margin-right: auto;
   gap: 20px;
   padding: 10px;
   width: 90vw;

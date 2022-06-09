@@ -1,19 +1,60 @@
 <section class="section" *ngIf="game">
   <h1>{{ game.name }}</h1>
-  <img [src]="gameCover" [alt]="'Capa do jogo ' + game.name" *ngIf="gameCover" />
-  <a
-    title="Ranjithsiji, CC BY-SA 4.0 &lt;https://creativecommons.org/licenses/by-sa/4.0&gt;, via Wikimedia Commons"
-    href="https://commons.wikimedia.org/wiki/File:No-Image-Placeholder.svg"
-    target="_blank"
-    *ngIf="!gameCover"
-    ><img
-      width="264"
-      height="352"
-      [alt]="'Nenhuma imagem disponível para o jogo ' + game.name"
-      src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/No-Image-Placeholder.svg/256px-No-Image-Placeholder.svg.png"
-  /></a>
-  <div class="game__details">
-    <p>{{ game.summary }}</p>
+  <div class="game">
+    <img
+      [src]="gameCover"
+      [alt]="'Capa do jogo ' + game.name"
+      *ngIf="gameCover"
+    />
+    <a
+      title="Ranjithsiji, CC BY-SA 4.0 &lt;https://creativecommons.org/licenses/by-sa/4.0&gt;, via Wikimedia Commons"
+      href="https://commons.wikimedia.org/wiki/File:No-Image-Placeholder.svg"
+      target="_blank"
+      *ngIf="!gameCover"
+      ><img
+        width="264"
+        height="352"
+        [alt]="'Nenhuma imagem disponível para o jogo ' + game.name"
+        src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/No-Image-Placeholder.svg/256px-No-Image-Placeholder.svg.png"
+    /></a>
+    <div class="game__details">
+      <p>{{ game.summary }}</p>
+      <p *ngIf="game.genres">Gêneros: {{ getGenres() }}.</p>
+      <p *ngIf="game.platforms">Plataformas: {{ getPlatforms() }}.</p>
+    </div>
+    <div class="game__ratings">
+      <!--Users Rating-->
+      <div class="rating__container">
+        <h4>Nota dos usuários</h4>
+        <span
+          class="game__rating"
+          [ngClass]="getRatingClasses(game.rating)"
+          *ngIf="game.rating"
+          >{{ game.rating | roundNumber }}</span
+        >
+        <span
+          class="game__rating game__rating--no-rating"
+          *ngIf="game.rating === undefined"
+          >-</span
+        >
+      </div>
+
+      <!--Critics Rating-->
+      <div class="rating__container">
+        <h4>Nota dos críticos</h4>
+        <span
+          class="game__rating"
+          [ngClass]="getRatingClasses(game.aggregated_rating)"
+          *ngIf="game.aggregated_rating"
+          >{{ game.aggregated_rating | roundNumber }}</span
+        >
+        <span
+          class="game__rating game__rating--no-rating"
+          *ngIf="game.aggregated_rating === undefined"
+          >-</span
+        >
+      </div>
+    </div>
   </div>
 </section>
 
