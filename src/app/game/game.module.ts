@@ -17,6 +17,12 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     RandomGameComponent,
     GameFiltersComponent,
   ],
-  imports: [CommonModule, GameRoutingModule, FormsModule, ReactiveFormsModule, SharedModule],
+  imports: [
+    CommonModule,
+    GameRoutingModule,
+    FormsModule,
+    ReactiveFormsModule,
+    SharedModule,
+  ],
 })
 export class GameModule {}

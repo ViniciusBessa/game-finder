@@ -76,7 +76,8 @@
   transition: background-color 600ms ease;
 }
 
-.form__submit-btn:hover, .form__submit-btn:active {
+.form__submit-btn:hover,
+.form__submit-btn:active {
   background-color: var(--color-primary);
   color: white;
 }
@@ -86,14 +87,15 @@
   width: fit-content;
   padding: 12px;
   margin: 18px 0px;
-  border: 2px solid #E30C0C;
+  border: 2px solid #e30c0c;
   background-color: transparent;
-  color: #E30C0C;
+  color: #e30c0c;
   transition: background-color 600ms ease;
 }
 
-.form__clear-btn:hover, .form__clear-btn:active {
-  background-color: #E30C0C;
+.form__clear-btn:hover,
+.form__clear-btn:active {
+  background-color: #e30c0c;
   color: white;
 }
 
