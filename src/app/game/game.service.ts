@@ -42,6 +42,20 @@ export class GameService {
       );
   }
 
+  getRandomGame(queryObject: GameQueryObject) {
+    let queryParams = new HttpParams();
+    queryParams = queryParams.append('where', queryObject.where || '');
+    queryParams = queryParams.append('fields', queryObject.fields);
+    return this.http
+      .get<{ game: Game }>(`${environment.igdbProxyUrl}/games/random`, {
+        params: queryParams,
+      })
+      .pipe(
+        take(1),
+        map((response) => response.game)
+      );
+  }
+
   getGameCount(queryObject: GameQueryObject) {
     let queryParams = new HttpParams();
 

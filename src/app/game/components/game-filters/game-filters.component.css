@@ -6,6 +6,7 @@
   width: 50vw;
   height: 70vh;
   background-color: white;
+  text-align: start;
 }
 
 .form__header {

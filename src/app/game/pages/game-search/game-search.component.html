@@ -16,7 +16,7 @@
     </button>
   </form>
   <div class="container">
-    <app-game-filters (formValues)="onFiltersUpdate($event)"></app-game-filters>
+    <app-game-filters (filters)="onFiltersUpdate($event)"></app-game-filters>
     <button class="clear-btn" type="button" (click)="onClear()">
       <strong>Limpar resultados</strong>
     </button>

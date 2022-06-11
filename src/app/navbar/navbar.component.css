@@ -49,10 +49,6 @@
   margin: 0;
 }
 
-.navbar__nav:last-child {
-  margin-left: auto;
-}
-
 .nav__link {
   color: white;
   text-decoration: none;

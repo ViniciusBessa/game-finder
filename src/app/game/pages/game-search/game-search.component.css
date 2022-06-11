@@ -41,8 +41,7 @@
   background-color: orange;
   cursor: pointer;
   font-size: 1.1rem;
-  min-height: 62px;
-  transition: outline 100ms ease;
+  min-height: 64px;
 }
 
 .clear-btn:hover {

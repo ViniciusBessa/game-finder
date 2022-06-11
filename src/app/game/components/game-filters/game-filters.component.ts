@@ -7,7 +7,6 @@ import {
   Validators,
 } from '@angular/forms';
 import { GameService } from '../../game.service';
-import { FiltersFormValues } from '../../models/filters-form-values.model';
 import { Genre } from '../../models/genre.model';
 import { Platform } from '../../models/platform.model';
 
@@ -17,7 +16,7 @@ import { Platform } from '../../models/platform.model';
   styleUrls: ['./game-filters.component.css'],
 })
 export class GameFiltersComponent implements OnInit {
-  @Output() formValues = new EventEmitter<FiltersFormValues>();
+  @Output() filters = new EventEmitter<string>();
   filtersForm = new FormGroup({
     minRating: new FormControl(0, [
       Validators.required,
@@ -92,10 +91,45 @@ export class GameFiltersComponent implements OnInit {
 
   onSubmit(): void {
     if (this.filtersForm.valid) {
-      this.formValues.emit(this.filtersForm.value);
+      const selectedGenresIds: string = this.getFormArrayIds(
+        this.filtersForm.value.genres
+      );
+      const selectedPlatformsIds: string = this.getFormArrayIds(
+        this.filtersForm.value.platforms
+      );
+      const whereQueryParam: string[] = [];
+
+      // If at least one genre is selected, it is added to the whereQueryParam
+      if (selectedGenresIds) {
+        whereQueryParam.push(`genres=(${selectedGenresIds})`);
+      }
+      // If at least one platform is selected, it is added to the whereQueryParam
+      if (selectedPlatformsIds) {
+        whereQueryParam.push(`platforms=(${selectedPlatformsIds})`);
+      }
+      // Adding the rating range to the where
+      const minRating = this.filtersForm.value.minRating;
+      const maxRating = this.filtersForm.value.maxRating;
+      whereQueryParam.push(`rating>=${minRating}&rating<=${maxRating}`);
+
+      // Emitting the result filters string
+      this.filters.emit(whereQueryParam.join('&'));
       // Closing the filters window
       this.onFiltersToggle();
     }
+  }
+
+  getFormArrayIds(
+    formArray: {
+      id: number;
+      name: string;
+      checked: boolean;
+    }[]
+  ): string {
+    return formArray
+      .filter((formControl) => formControl.checked)
+      .map((formControl) => formControl.id)
+      .join(',');
   }
 
   onClearFormsArray(formsArrayName: string): void {

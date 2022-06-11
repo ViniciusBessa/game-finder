@@ -64,29 +64,10 @@ export class GameSearchComponent implements OnInit {
     }
   }
 
-  onFiltersUpdate(formValues: FiltersFormValues): void {
-    const selectedGenresIds: string = this.getFormArrayIds(formValues.genres);
-    const selectedPlatformsIds: string = this.getFormArrayIds(
-      formValues.platforms
-    );
-    const whereQueryParam: string[] = [];
-
-    // If at least one genre is selected, it is added to the whereQueryParam
-    if (selectedGenresIds) {
-      whereQueryParam.push(`genres=(${selectedGenresIds})`);
-    }
-    // If at least one platform is selected, it is added to the whereQueryParam
-    if (selectedPlatformsIds) {
-      whereQueryParam.push(`platforms=(${selectedPlatformsIds})`);
-    }
-    // Adding the rating range to the where
-    const minRating = formValues.minRating;
-    const maxRating = formValues.maxRating;
-    whereQueryParam.push(`rating>=${minRating}&rating<=${maxRating}`);
-
+  onFiltersUpdate(filters: string): void {
     const queryParams = {
       fields: '*,genres.*,platforms.*,cover.*',
-      where: whereQueryParam.join('&'),
+      where: filters,
       page: null,
     };
     this.router.navigate([], {
@@ -102,19 +83,6 @@ export class GameSearchComponent implements OnInit {
       queryParams: { fields: null, search: null, where: null, page: null },
       queryParamsHandling: 'merge',
     });
-  }
-
-  getFormArrayIds(
-    formArray: {
-      id: number;
-      name: string;
-      checked: boolean;
-    }[]
-  ): string {
-    return formArray
-      .filter((formControl) => formControl.checked)
-      .map((formControl) => formControl.id)
-      .join(',');
   }
 
   getLastPage(): number {

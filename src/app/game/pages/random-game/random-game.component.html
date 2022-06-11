@@ -1,1 +1,30 @@
-<p>random-game works!</p>
+<div class="container">
+  <div *ngIf="randomGame && !isLoading">
+    <img
+      *ngIf="gameCoverUrl"
+      [src]="gameCoverUrl"
+      [alt]="'Cover do jogo ' + randomGame.name"
+    />
+    <a
+      title="Ranjithsiji, CC BY-SA 4.0 &lt;https://creativecommons.org/licenses/by-sa/4.0&gt;, via Wikimedia Commons"
+      href="https://commons.wikimedia.org/wiki/File:No-Image-Placeholder.svg"
+      target="_blank"
+      *ngIf="!gameCoverUrl"
+      ><img
+        width="264"
+        height="352"
+        [alt]="'Nenhuma imagem disponível para o jogo ' + randomGame.name"
+        src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/No-Image-Placeholder.svg/256px-No-Image-Placeholder.svg.png"
+    /></a>
+    <h1>{{ randomGame.name }}</h1>
+    <a [routerLink]="['/games', randomGame.id]">Ir para a página do jogo</a>
+  </div>
+
+  <app-game-filters (filters)="onFiltersUpdate($event)"></app-game-filters>
+  <div class="container container--small-row">
+    <button class="clear-btn" (click)="onClearFilters()">Limpar filtros</button>
+    <button class="submit-btn" (click)="onGetRandomGame()">Buscar jogo</button>
+  </div>
+</div>
+
+<app-loading-spinner *ngIf="isLoading"></app-loading-spinner>
