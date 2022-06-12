@@ -1,6 +1,6 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { map, take } from 'rxjs';
+import { map, mergeMap, take } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { GameQueryObject } from '../models/gameQueryObject.model';
 import { Game } from './models/game.model';
@@ -47,12 +47,23 @@ export class GameService {
     queryParams = queryParams.append('where', queryObject.where || '');
     queryParams = queryParams.append('fields', queryObject.fields);
     return this.http
-      .get<{ game: Game }>(`${environment.igdbProxyUrl}/games/random`, {
+      .get<{ count: number }>(`${environment.igdbProxyUrl}/games/count`, {
         params: queryParams,
       })
       .pipe(
         take(1),
-        map((response) => response.game)
+        mergeMap((response) => {
+          const randomGameNumber: number = Math.floor(
+            Math.random() * response.count
+          );
+          queryParams = queryParams.append('limit', 1);
+          queryParams = queryParams.append('offset', randomGameNumber);
+          return this.http.get<{ games: Game[] }>(
+            `${environment.igdbProxyUrl}/games`,
+            { params: queryParams }
+          );
+        }),
+        map((response) => response.games[0])
       );
   }
 
