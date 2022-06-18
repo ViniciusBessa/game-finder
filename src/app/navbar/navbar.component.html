@@ -4,14 +4,14 @@
   </button>
   <div class="container collapsed" #navContainer>
     <h4 class="navbar__brand">
-      <a [routerLink]="['home']" class="nav__link">Game Finder</a>
+      <a [routerLink]="['/home']" class="nav__link">Game Finder</a>
     </h4>
     <ul class="navbar__nav">
       <li>
         <a
           class="nav__link"
           routerLinkActive="active"
-          [routerLink]="['games', 'search']"
+          [routerLink]="['/games', 'search']"
         >
           Buscar jogo
         </a>
@@ -20,7 +20,7 @@
         <a
           class="nav__link"
           routerLinkActive="active"
-          [routerLink]="['games', 'random']"
+          [routerLink]="['/games', 'random']"
         >
           Jogo aleatório
         </a>

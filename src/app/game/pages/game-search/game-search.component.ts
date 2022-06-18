@@ -3,7 +3,6 @@ import { NgForm } from '@angular/forms';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { GameQueryObject } from 'src/app/models/gameQueryObject.model';
 import { GameService } from '../../game.service';
-import { FiltersFormValues } from '../../models/filters-form-values.model';
 import { Game } from '../../models/game.model';
 
 @Component({

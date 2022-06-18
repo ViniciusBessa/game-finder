@@ -20,8 +20,10 @@
 
   <div class="game__details">
     <h3>{{ game.name }}</h3>
-    <p *ngIf="game.summary && game.summary.length <= 100">{{ game.summary }}</p>
-    <p *ngIf="game.summary && game.summary.length > 100">
+    <p class="game__summary" *ngIf="game.summary && game.summary.length <= 100">
+      {{ game.summary }}
+    </p>
+    <p class="game__summary" *ngIf="game.summary && game.summary.length > 100">
       {{ game.summary.substring(0, 100) }}...
     </p>
     <p class="game__genres" *ngIf="getGameGenres()">{{ getGameGenres() }}</p>
