@@ -1,0 +1,35 @@
+.container {
+  display: flex;
+  position: relative;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 70vh;
+  padding: 8px;
+}
+
+.background-img {
+  position: absolute;
+  opacity: 5%;
+  pointer-events: none;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.btn {
+  border: 3px solid var(--bg-secondary);
+  border-radius: 12px;
+  background-color: var(--bg-primary);
+  color: var(--bg-secondary);
+  padding: 6px 18px;
+  font-size: 1.2rem;
+  transition: background-color 600ms ease;
+}
+
+.btn:hover,
+.btn:active {
+  background-color: var(--bg-secondary);
+  color: var(--bg-primary);
+}

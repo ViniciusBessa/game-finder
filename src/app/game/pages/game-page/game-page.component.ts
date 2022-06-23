@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Params } from '@angular/router';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 import { GameService } from '../../game.service';
 import { Game } from '../../models/game.model';
 
@@ -13,11 +13,11 @@ export class GamePageComponent implements OnInit {
   gameScreenshots: string[] = [];
   gameCover: string | undefined;
   isLoading: boolean = false;
-  responseError: any;
 
   constructor(
     private gameService: GameService,
-    private route: ActivatedRoute
+    private router: Router,
+    private route: ActivatedRoute,
   ) {}
 
   ngOnInit(): void {
@@ -38,9 +38,8 @@ export class GamePageComponent implements OnInit {
               );
             }
           },
-          error: (error) => {
-            this.responseError = error;
-            this.isLoading = false;
+          error: () => {
+            this.router.navigate(['/404']);
           },
           complete: () => (this.isLoading = false),
         });

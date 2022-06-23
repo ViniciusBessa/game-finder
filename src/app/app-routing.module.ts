@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
+import { Error404Component } from './error404/error404.component';
 import { HomeComponent } from './home/home.component';
 
 const routes: Routes = [
@@ -10,7 +11,9 @@ const routes: Routes = [
     loadChildren: () =>
       import('./game/game.module').then((module) => module.GameModule),
   },
+  { path: '**', component: Error404Component },
 ];
+
 @NgModule({
   imports: [
     RouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules }),
