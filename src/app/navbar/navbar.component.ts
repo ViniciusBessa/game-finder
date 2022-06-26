@@ -1,6 +1,4 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { NgForm } from '@angular/forms';
-import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-navbar',
@@ -14,7 +12,7 @@ export class NavbarComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  onNavbarToggle() {
+  onNavbarToggle(): void {
     this.navContainer.nativeElement.classList.toggle('collapsed');
   }
 }

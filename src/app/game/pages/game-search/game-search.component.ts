@@ -52,7 +52,7 @@ export class GameSearchComponent implements OnInit {
     if (this.nameForm.valid) {
       const queryParams = {
         fields: '*,genres.*,platforms.*,cover.*',
-        search: this.nameForm.value.name,
+        search: (<string>this.nameForm.value.name).trim(),
         page: null,
       };
       this.router.navigate([], {

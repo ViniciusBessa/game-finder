@@ -14,16 +14,16 @@ export class ImageSliderComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  onToggleSlider(index: number) {
+  onToggleSlider(index: number): void {
     this.selectedImage = index;
     this.showSlider = !this.showSlider;
   }
 
-  getSelectedImage() {
+  getSelectedImage(): string {
     return this.images[this.selectedImage];
   }
 
-  onUpdateSelectedImage(number: number) {
+  onUpdateSelectedImage(number: number): void {
     let newImageIndex = this.selectedImage + number;
     if (newImageIndex < 0) {
       newImageIndex = this.images.length - Math.abs(newImageIndex);

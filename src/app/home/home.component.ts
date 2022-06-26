@@ -55,12 +55,12 @@ export class HomeComponent implements OnInit {
     }
   }
 
-  onSubmit() {
+  onSubmit(): void {
     if (this.gameForm.valid) {
       this.router.navigate(['games', 'search'], {
         queryParams: {
           fields: '*,genres.*,platforms.*,cover.*',
-          search: this.gameForm.value.name,
+          search: (<string>this.gameForm.value.name).trim(),
         },
       });
     }

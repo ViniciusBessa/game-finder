@@ -22,7 +22,7 @@ export class GameItemComponent implements OnInit {
     }
   }
 
-  getRatingClasses(rating: number) {
+  getRatingClasses(rating: number): { [key: string]: boolean } {
     return {
       'game__rating--high': rating >= 75,
       'game__rating--average': rating >= 50 && rating < 75,
@@ -34,7 +34,7 @@ export class GameItemComponent implements OnInit {
     return this.game.genres?.map((genre) => genre.name).join(', ');
   }
 
-  onGamePage() {
+  onGamePage(): void {
     window.scrollTo({ top: 0 });
     this.router.navigate(['games', this.game.id]);
   }

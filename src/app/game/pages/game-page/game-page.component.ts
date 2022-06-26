@@ -17,7 +17,7 @@ export class GamePageComponent implements OnInit {
   constructor(
     private gameService: GameService,
     private router: Router,
-    private route: ActivatedRoute,
+    private route: ActivatedRoute
   ) {}
 
   ngOnInit(): void {
@@ -61,7 +61,7 @@ export class GamePageComponent implements OnInit {
     this.gameScreenshots = screenshots;
   }
 
-  getRatingClasses(rating: number) {
+  getRatingClasses(rating: number): { [key: string]: boolean } {
     return {
       'game__rating--high': rating >= 75,
       'game__rating--average': rating >= 50 && rating < 75,
