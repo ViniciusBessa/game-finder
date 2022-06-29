@@ -11,7 +11,9 @@ import { Game } from '../../models/game.model';
   styleUrls: ['./game-search.component.css'],
 })
 export class GameSearchComponent implements OnInit {
-  form: UntypedFormGroup = new UntypedFormGroup({ name: new UntypedFormControl(null) });
+  form: UntypedFormGroup = new UntypedFormGroup({
+    name: new UntypedFormControl(''),
+  });
   games: Game[] = [];
   gameCount: number = 0;
   currentPage: number = 1;
