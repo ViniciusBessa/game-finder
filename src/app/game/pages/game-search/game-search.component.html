@@ -1,11 +1,11 @@
 <section class="section">
-  <form class="form" (ngSubmit)="onSubmit()" #form="ngForm">
+  <form class="form" [formGroup]="form" (ngSubmit)="onSubmit()">
     <input
       name="name"
       class="form__input"
       type="text"
       placeholder="Pesquise por um jogo"
-      ngModel
+      formControlName="name"
     />
     <button class="form__submit-btn" type="submit">
       <img

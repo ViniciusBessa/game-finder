@@ -1,5 +1,5 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { NgForm } from '@angular/forms';
+import { Component, OnInit } from '@angular/core';
+import { FormControl, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { GameQueryObject } from 'src/app/models/gameQueryObject.model';
 import { GameService } from '../../game.service';
@@ -11,7 +11,7 @@ import { Game } from '../../models/game.model';
   styleUrls: ['./game-search.component.css'],
 })
 export class GameSearchComponent implements OnInit {
-  @ViewChild('form') nameForm!: NgForm;
+  form: FormGroup = new FormGroup({ name: new FormControl(null) });
   games: Game[] = [];
   gameCount: number = 0;
   currentPage: number = 1;
@@ -49,10 +49,10 @@ export class GameSearchComponent implements OnInit {
   }
 
   onSubmit(): void {
-    if (this.nameForm.valid) {
+    if (this.form.valid) {
       const queryParams = {
         fields: '*,genres.*,platforms.*,cover.*',
-        search: (<string>this.nameForm.value.name).trim(),
+        search: (<string>this.form.value.name).trim(),
         page: null,
       };
       this.router.navigate([], {

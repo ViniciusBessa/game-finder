@@ -136,8 +136,9 @@ export class GameFiltersComponent implements OnInit {
     const formsArray: FormArray | undefined = <FormArray>(
       this.filtersForm.get(formsArrayName)
     );
-    if (!formsArray) return;
-    // Setting all controls in the formsArray to false
-    formsArray.controls.forEach((control) => (control.value.checked = false));
+    if (formsArray) {
+      // Setting all controls in the formsArray to false
+      formsArray.controls.forEach((control) => (control.value.checked = false));
+    }
   }
 }

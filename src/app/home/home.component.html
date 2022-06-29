@@ -1,13 +1,12 @@
 <section class="section section--bg-dark container container--flex-column">
   <h1 class="text-white">Procure por jogos entre os milhares disponíveis!</h1>
-  <form class="form" (ngSubmit)="onSubmit()" #form="ngForm">
+  <form class="form" [formGroup]="gameForm" (ngSubmit)="onSubmit()">
     <input
       name="name"
       class="form__input"
       type="text"
       placeholder="Pesquise por um jogo"
-      ngModel
-      required
+      formControlName="name"
     />
   </form>
 </section>

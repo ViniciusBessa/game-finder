@@ -20,7 +20,6 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
   imports: [
     CommonModule,
     GameRoutingModule,
-    FormsModule,
     ReactiveFormsModule,
     SharedModule,
   ],
