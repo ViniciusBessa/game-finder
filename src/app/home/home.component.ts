@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { GameService } from '../game/game.service';
 import { Game } from '../game/models/game.model';
@@ -10,8 +10,8 @@ import { Game } from '../game/models/game.model';
   styleUrls: ['./home.component.css'],
 })
 export class HomeComponent implements OnInit {
-  gameForm: FormGroup = new FormGroup({
-    name: new FormControl(null, Validators.required),
+  gameForm: UntypedFormGroup = new UntypedFormGroup({
+    name: new UntypedFormControl(null, Validators.required),
   });
   games: Game[] = [];
   mainGenresGames: string[] = [

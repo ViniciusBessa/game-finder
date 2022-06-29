@@ -1,9 +1,9 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import {
   AbstractControl,
-  FormArray,
-  FormControl,
-  FormGroup,
+  UntypedFormArray,
+  UntypedFormControl,
+  UntypedFormGroup,
   Validators,
 } from '@angular/forms';
 import { GameService } from '../../game.service';
@@ -17,19 +17,19 @@ import { Platform } from '../../models/platform.model';
 })
 export class GameFiltersComponent implements OnInit {
   @Output() filters = new EventEmitter<string>();
-  filtersForm = new FormGroup({
-    minRating: new FormControl(0, [
+  filtersForm = new UntypedFormGroup({
+    minRating: new UntypedFormControl(0, [
       Validators.required,
       Validators.min(0),
       Validators.max(100),
     ]),
-    maxRating: new FormControl(100, [
+    maxRating: new UntypedFormControl(100, [
       Validators.required,
       Validators.min(0),
       Validators.max(100),
     ]),
-    genres: new FormArray([]),
-    platforms: new FormArray([]),
+    genres: new UntypedFormArray([]),
+    platforms: new UntypedFormArray([]),
   });
   showForm: boolean = false;
 
@@ -58,31 +58,31 @@ export class GameFiltersComponent implements OnInit {
   }
 
   setGenresFormArray(genres: Genre[]): void {
-    const genresArray: FormArray = <FormArray>this.filtersForm.get('genres');
+    const genresArray: UntypedFormArray = <UntypedFormArray>this.filtersForm.get('genres');
     genres.forEach((genre) => {
       genresArray.push(
-        new FormControl({ id: genre.id, name: genre.name, checked: true })
+        new UntypedFormControl({ id: genre.id, name: genre.name, checked: true })
       );
     });
   }
 
   get genresFormArray(): AbstractControl[] {
-    return (<FormArray>this.filtersForm.get('genres')).controls;
+    return (<UntypedFormArray>this.filtersForm.get('genres')).controls;
   }
 
   setPlatformsFormArray(platforms: Platform[]): void {
-    const platformsArray: FormArray = <FormArray>(
+    const platformsArray: UntypedFormArray = <UntypedFormArray>(
       this.filtersForm.get('platforms')
     );
     platforms.forEach((platform) => {
       platformsArray.push(
-        new FormControl({ id: platform.id, name: platform.name, checked: true })
+        new UntypedFormControl({ id: platform.id, name: platform.name, checked: true })
       );
     });
   }
 
   get platformsFormArray(): AbstractControl[] {
-    return (<FormArray>this.filtersForm.get('platforms')).controls;
+    return (<UntypedFormArray>this.filtersForm.get('platforms')).controls;
   }
 
   onFiltersToggle(): void {
@@ -133,7 +133,7 @@ export class GameFiltersComponent implements OnInit {
   }
 
   onClearFormsArray(formsArrayName: string): void {
-    const formsArray: FormArray | undefined = <FormArray>(
+    const formsArray: UntypedFormArray | undefined = <UntypedFormArray>(
       this.filtersForm.get(formsArrayName)
     );
     if (formsArray) {

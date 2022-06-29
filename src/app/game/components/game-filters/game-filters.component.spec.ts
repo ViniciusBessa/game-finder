@@ -5,7 +5,7 @@ import {
   TestBed,
   tick,
 } from '@angular/core/testing';
-import { FormArray, FormControl, ReactiveFormsModule } from '@angular/forms';
+import { UntypedFormArray, UntypedFormControl, ReactiveFormsModule } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { GameService } from '../../game.service';
 
@@ -61,8 +61,8 @@ describe('GameFiltersComponent', () => {
   it('should always keep the maxRating greater than or equal to minRating', () => {
     const filtersForm = component.filtersForm;
     filtersForm.patchValue({ minRating: 10, maxRating: 5 });
-    const minRating = <FormControl>filtersForm.get('minRating');
-    const maxRating = <FormControl>filtersForm.get('maxRating');
+    const minRating = <UntypedFormControl>filtersForm.get('minRating');
+    const maxRating = <UntypedFormControl>filtersForm.get('maxRating');
     expect(maxRating.value).toBeGreaterThanOrEqual(minRating.value);
   });
 
@@ -71,8 +71,8 @@ describe('GameFiltersComponent', () => {
     spyOn(component, 'onFiltersToggle');
     const filtersForm = component.filtersForm;
     filtersForm.patchValue({ minRating: -10, maxRating: -10 });
-    const minRating = <FormControl>filtersForm.get('minRating');
-    const maxRating = <FormControl>filtersForm.get('maxRating');
+    const minRating = <UntypedFormControl>filtersForm.get('minRating');
+    const maxRating = <UntypedFormControl>filtersForm.get('maxRating');
     expect(minRating.valid).toBeFalse();
     expect(maxRating.valid).toBeFalse();
     expect(filtersForm.valid).toBeFalse();
@@ -109,7 +109,7 @@ describe('GameFiltersComponent', () => {
       '.form__clear-btn'
     ) as HTMLButtonElement;
     clearBtn.click();
-    const genresArray = <FormArray>component.filtersForm.get('genres');
+    const genresArray = <UntypedFormArray>component.filtersForm.get('genres');
     const isArrayClear = genresArray.controls.every(
       (control) => !control.value.checked
     );

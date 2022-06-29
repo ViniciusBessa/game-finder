@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { UntypedFormControl, UntypedFormGroup } from '@angular/forms';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { GameQueryObject } from 'src/app/models/gameQueryObject.model';
 import { GameService } from '../../game.service';
@@ -11,7 +11,7 @@ import { Game } from '../../models/game.model';
   styleUrls: ['./game-search.component.css'],
 })
 export class GameSearchComponent implements OnInit {
-  form: FormGroup = new FormGroup({ name: new FormControl(null) });
+  form: UntypedFormGroup = new UntypedFormGroup({ name: new UntypedFormControl(null) });
   games: Game[] = [];
   gameCount: number = 0;
   currentPage: number = 1;
