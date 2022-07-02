@@ -1,6 +1,6 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { map, mergeMap, take } from 'rxjs';
+import { map, mergeMap, take, tap, throwError } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { GameQueryObject } from '../models/gameQueryObject.model';
 import { Game } from './models/game.model';
@@ -63,7 +63,12 @@ export class GameService {
             { params: queryParams }
           );
         }),
-        map((response) => response.games[0])
+        map((response) => {
+          if (response.games.length === 0) {
+            throw new Error('Nenhum jogo foi encontrado');
+          }
+          return response.games[0];
+        })
       );
   }
 

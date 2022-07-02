@@ -3,6 +3,7 @@ import { RoundNumberPipe } from './round-number/round-number.pipe';
 import { LoadingSpinnerComponent } from './loading-spinner/loading-spinner.component';
 import { ImageSliderComponent } from './image-slider/image-slider.component';
 import { CommonModule } from '@angular/common';
+import { AlertComponent } from './alert/alert.component';
 
 @NgModule({
   imports: [CommonModule],
@@ -10,7 +11,13 @@ import { CommonModule } from '@angular/common';
     RoundNumberPipe,
     LoadingSpinnerComponent,
     ImageSliderComponent,
+    AlertComponent,
   ],
-  exports: [RoundNumberPipe, LoadingSpinnerComponent, ImageSliderComponent],
+  exports: [
+    RoundNumberPipe,
+    LoadingSpinnerComponent,
+    ImageSliderComponent,
+    AlertComponent,
+  ],
 })
 export class SharedModule {}

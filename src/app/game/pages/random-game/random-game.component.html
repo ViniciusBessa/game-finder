@@ -28,3 +28,8 @@
 </div>
 
 <app-loading-spinner *ngIf="isLoading"></app-loading-spinner>
+<app-alert
+  [message]="message"
+  (closeAlert)="onClearAlert()"
+  *ngIf="message"
+></app-alert>
