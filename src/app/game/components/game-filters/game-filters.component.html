@@ -60,7 +60,7 @@
     <!--Genres Section-->
     <h4>Gêneros</h4>
     <div class="container" formArrayName="genres">
-      <label *ngFor="let item of genresFormArray; let index = index">
+      <label *ngFor="let item of genresFormArray">
         <input
           type="checkbox"
           [checked]="item.value.checked"
@@ -80,7 +80,7 @@
     <!--Platforms Section-->
     <h4>Plataformas</h4>
     <div class="container" formArrayName="platforms">
-      <label *ngFor="let item of platformsFormArray; let index = index">
+      <label *ngFor="let item of platformsFormArray">
         <input
           type="checkbox"
           [checked]="item.value.checked"
