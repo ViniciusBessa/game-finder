@@ -28,6 +28,9 @@ export class GameSearchComponent implements OnInit {
 
   ngOnInit(): void {
     this.route.queryParams.subscribe((queryParams: Params) => {
+      // Scrolling the user's page to the top
+      window.scrollTo({ top: 0 });
+
       this.currentPage = +queryParams['page'] || 1;
       if (Object.values(queryParams).length > 0) {
         this.isLoading = true;
